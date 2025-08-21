@@ -1,4 +1,3 @@
-
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -30,7 +29,7 @@ app.use(morgan("dev"));
 // Rate limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100
+  max: 100,
 });
 app.use(limiter);
 
@@ -41,6 +40,10 @@ app.use("/api/comments", commentsRoutes);
 
 // Error handler (should be last)
 app.use(errorHandler);
+
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
